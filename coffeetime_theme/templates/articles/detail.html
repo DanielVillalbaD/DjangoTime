@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% for article in articles %}
+        <title>{{article.title}}</title>
+    {% endfor %}
+</head>
+<body>
+
+    {% include "../shared/header.html" %}
+
+    {% for article in articles %}
+        <article class="article-detail">
+            <header class="header-detail text-center container-fluid">
+                <nav class="detail-tags">
+                    {% for tag in article.tags.all %}
+                        <a href="/{{tag.pk}}/">{{tag}}</a>
+                    {% endfor %}
+                </nav>
+                <h2>{{article.title}}</h2>
+                <div class="detail-date"><small>{{article.posted_on}} | Publicado por {{article.author}}</small></div>
+                <img alt="{{article.title}} image" class="article-img" srcset="{{article.image_l.url}} 1200w, {{article.image_m.url}} 900w, {{article.image_s}} 300w" />
+            </header>
+            <section class="container article-body">
+                <container class="detail-subtitle">
+                    <p>{{article.subtitle}}</p>
+                </container>
+                <p>{{article.contain}}</p>
+            </section>
+            <footer class="text-center article-footer"><i class="icon ion-ios-heart-outline"></i></footer>
+        </article>
+    {% endfor %}
+
+    {% include "../shared/footer.html" %}
+
+</body>
+</html>

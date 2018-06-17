@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Coffe Time</title>
+</head>
+<body>
+
+    {% include "../shared/header.html" %}
+
+    <section class="container-fluid pc-slider">
+        <div class="row">
+            <div id="carouselExampleControls" class="col carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <picture class="carousel-item active">
+                        <img class="d-block slide-img" src="{{article.image_l.url}}" alt="Imagen slider">
+                    </picture>
+                </div>
+                <!-- Otro slider here -->
+                <nav class="nav-slider">
+                    <a class="prev" href="#" role="button" data-slide="prev">
+                        <span class="icon-wrap" aria-hidden="true"></span>
+                        <h4>Artículo<strong> Anterior</strong></h4>
+                    </a>
+                    <a class="next" href="#" role="button" data-slide="next">
+                        <span class="icon-wrap" aria-hidden="true"></span>
+                        <h4><strong>Siguiente</strong> Artículo</h4>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <section class="container articles-container">
+        <div class="row masonry-grid">
+
+            {% for article in articles %}
+                <div class="col-md-6 col-lg-4 masonry-column px-4">
+                    <article class="custom-card">
+                        <div class="custom-thumb">
+                            <a href="/article/{{article.pk}}" class="custom-read-more">
+                                <img srcset="{{article.image_s.url}} 200w, {{article.thumb.url}} 600w" alt="Imagen destacada">
+                            </a>
+                        </div>
+                        <nav class="custom-card-tags">{{article.tags}}</nav>
+                        <h3 class="custom-card-title">
+                            <a href="/article/{{article.pk}}" class="custom-read-more">{{article.title}}</a>
+                        </h3>
+                        <p class="custom-card-subtitle">{{article.subtitle}}</p>
+                        <div class="custom-card-footer align-middle">
+                            <p>Publicado {{article.posted_on}}</p>
+                            <div class="card-icons">
+                                <a href="#">
+                                    <i class="icon ion-ios-chatbubble-outline mx-2">
+                                        <sup class="comments-number"></sup>
+                                    </i>
+                                </a>
+                                <i class="icon ion-ios-heart-outline"></i>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            {% endfor %}
+
+        </div>
+    </section>
+
+    <section class="container go-up">
+        <a href="#" class="up" id="go-up">
+            <span class="ion ion-arrow-up-c scroll-up"></span>
+            <span class="text">Subir</span>
+        </a>
+    </section>
+
+    {% include "../shared/footer.html" %}
+
+</body>
+</html>
